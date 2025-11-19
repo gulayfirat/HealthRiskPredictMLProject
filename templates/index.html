@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sağlık Riski Tahmin Aracı</title>
+    <title>Health Risk Prediction Tool</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -27,143 +27,142 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
 
-    <!-- Ana Konteyner -->
+    <!-- Main Container -->
     <div class="w-full max-w-xl bg-white shadow-2xl rounded-xl p-8 space-y-8 border border-gray-100">
 
         <header class="text-center">
-            <h1 class="text-3xl font-extrabold text-gray-900">Sağlık Riski Tahmin Uygulaması</h1>
-            <p class="mt-2 text-sm text-gray-500">Yaşam tarzı verilerinizi girerek potansiyel sağlık riskinizi öğrenin.</p>
+            <h1 class="text-3xl font-extrabold text-gray-900">Health Risk Prediction Application</h1>
+            <p class="mt-2 text-sm text-gray-500">Enter your lifestyle data to find out your potential health risk.</p>
         </header>
 
-        <!-- Tahmin Formu -->
+        <!-- Prediction Form -->
         <form id="predictionForm" class="grid grid-cols-2 gap-x-6 gap-y-4 custom-scrollbar max-h-[70vh] overflow-y-auto pr-2">
-            
-            <!-- Yaş (age: int) -->
+
+            <!-- Age (age: int) -->
             <div class="col-span-1">
-                <label for="age" class="block text-sm font-medium text-gray-700">Yaş</label>
+                <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
                 <input type="number" id="age" min="18" max="100" required
                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
             </div>
 
-            <!-- Kilo (weight: int) -->
+            <!-- Weight (weight: int) -->
             <div class="col-span-1">
-                <label for="weight" class="block text-sm font-medium text-gray-700">Kilo (kg)</label>
+                <label for="weight" class="block text-sm font-medium text-gray-700">Weight (kg)</label>
                 <input type="number" id="weight" min="40" max="200" required
                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
             </div>
 
-            <!-- Boy (height: int) -->
+            <!-- Height (height: int) -->
             <div class="col-span-1">
-                <label for="height" class="block text-sm font-medium text-gray-700">Boy (cm)</label>
+                <label for="height" class="block text-sm font-medium text-gray-700">Height (cm)</label>
                 <input type="number" id="height" min="100" max="250" required
                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border"
                        oninput="calculateBMI()">
             </div>
 
-            <!-- BMI (bmi: float) - Otomatik hesaplanacak -->
+            <!-- BMI (bmi: float) - Calculated automatically -->
             <div class="col-span-1">
-                <label for="bmi" class="block text-sm font-medium text-gray-700">BMI (Vücut Kitle İndeksi)</label>
+                <label for="bmi" class="block text-sm font-medium text-gray-700">BMI (Body Mass Index)</label>
                 <input type="number" id="bmi" step="0.01" readonly required
                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border bg-gray-100 cursor-not-allowed">
             </div>
-            
-            <!-- Uyku (sleep: float) -->
+
+            <!-- Sleep (sleep: float) -->
             <div class="col-span-1">
-                <label for="sleep" class="block text-sm font-medium text-gray-700">Uyku Süresi (saat)</label>
+                <label for="sleep" class="block text-sm font-medium text-gray-700">Sleep Duration (hours)</label>
                 <input type="number" id="sleep" step="0.1" min="3" max="12" required
                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
             </div>
 
-            <!-- Egzersiz (exercise: str) -->
+            <!-- Exercise (exercise: str) -->
             <div class="col-span-1">
-                <label for="exercise" class="block text-sm font-medium text-gray-700">Egzersiz Sıklığı</label>
+                <label for="exercise" class="block text-sm font-medium text-gray-700">Exercise Frequency</label>
                 <select id="exercise" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
-                    <option value="low">Düşük</option>
-                    <option value="medium">Orta</option>
-                    <option value="high">Yüksek</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
                 </select>
             </div>
 
-            <!-- Şeker Tüketimi (sugar_intake: str) -->
+            <!-- Sugar Intake (sugar_intake: str) -->
             <div class="col-span-1">
-                <label for="sugar_intake" class="block text-sm font-medium text-gray-700">Şeker Tüketimi</label>
+                <label for="sugar_intake" class="block text-sm font-medium text-gray-700">Sugar Intake</label>
                 <select id="sugar_intake" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
-                    <option value="low">Düşük</option>
-                    <option value="medium">Orta</option>
-                    <option value="high">Yüksek</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
                 </select>
             </div>
 
-            <!-- Sigara (smoking: str) -->
+            <!-- Smoking (smoking: str) -->
             <div class="col-span-1">
-                <label for="smoking" class="block text-sm font-medium text-gray-700">Sigara Kullanımı</label>
+                <label for="smoking" class="block text-sm font-medium text-gray-700">Smoking</label>
                 <select id="smoking" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
-                    <option value="no">Hayır</option>
-                    <option value="yes">Evet</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
                 </select>
             </div>
-            
-            <!-- Alkol (alcohol: str) -->
+
+            <!-- Alcohol (alcohol: str) -->
             <div class="col-span-1">
-                <label for="alcohol" class="block text-sm font-medium text-gray-700">Alkol Tüketimi</label>
-                <!-- Düzeltilmiş: yes/no seçenekleri -->
+                <label for="alcohol" class="block text-sm font-medium text-gray-700">Alcohol Consumption</label>
                 <select id="alcohol" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
-                    <option value="no">Hayır</option>
-                    <option value="yes">Evet</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
                 </select>
             </div>
 
-            <!-- Medeni Durum (married: str) -->
+            <!-- Marital Status (married: str) -->
             <div class="col-span-1">
-                <label for="married" class="block text-sm font-medium text-gray-700">Medeni Durum</label>
+                <label for="married" class="block text-sm font-medium text-gray-700">Marital Status</label>
                 <select id="married" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
-                    <option value="no">Bekar</option>
-                    <option value="yes">Evli</option>
+                    <option value="no">Single</option>
+                    <option value="yes">Married</option>
                 </select>
             </div>
 
-            <!-- Meslek (profession: str) -->
+            <!-- Profession (profession: str) -->
             <div class="col-span-2">
-                <label for="profession" class="block text-sm font-medium text-gray-700">Meslek</label>
-                <!-- Bu meslek listesi, veri setinde bulunan en yaygın mesleklere dayanmaktadır -->
+                <label for="profession" class="block text-sm font-medium text-gray-700">Profession</label>
+                <!-- This list is based on common professions in the dataset -->
                 <select id="profession" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2 border">
-                    <option value="Student">Öğrenci</option>
-                    <option value="Driver">Sürücü</option>
-                    <option value="Software Engineer">Yazılım Mühendisi</option>
-                    <option value="Doctor">Doktor</option>
-                    <option value="Teacher">Öğretmen</option>
-                    <option value="Lawyer">Avukat</option>
-                    <option value="Artist">Sanatçı</option>
-                    <option value="Other">Diğer</option>
+                    <option value="Student">Student</option>
+                    <option value="Driver">Driver</option>
+                    <option value="Software Engineer">Software Engineer</option>
+                    <option value="Doctor">Doctor</option>
+                    <option value="Teacher">Teacher</option>
+                    <option value="Lawyer">Lawyer</option>
+                    <option value="Artist">Artist</option>
+                    <option value="Other">Other</option>
                 </select>
             </div>
-            
-            <!-- Tahmin Butonu -->
+
+            <!-- Prediction Button -->
             <div class="col-span-2 mt-4">
                 <button type="submit" id="submitButton"
                         class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-lg text-lg font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
-                    Tahmini Hesapla
+                    Calculate Prediction
                 </button>
                 <div id="loadingIndicator" class="mt-2 text-center text-indigo-600 font-medium hidden">
-                    Tahmin yapılıyor, lütfen bekleyin...
+                    Making prediction, please wait...
                 </div>
             </div>
         </form>
 
-        <!-- Sonuç Alanı -->
+        <!-- Result Area -->
         <div id="resultContainer" class="mt-6 p-4 rounded-lg text-center shadow-inner hidden">
-            <h3 class="text-xl font-semibold mb-2 text-gray-800">Tahmin Sonucu:</h3>
+            <h3 class="text-xl font-semibold mb-2 text-gray-800">Prediction Result:</h3>
             <p id="predictionResult" class="text-3xl font-extrabold"></p>
             <p id="riskDescription" class="mt-2 text-sm text-gray-600"></p>
         </div>
 
-        <!-- Hata Mesajı -->
+        <!-- Error Message -->
         <div id="errorContainer" class="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md hidden" role="alert">
             <p id="errorMessage"></p>
         </div>
@@ -171,7 +170,7 @@
     </div>
 
     <script>
-        // Form alanlarının referansları
+        // References to form fields
         const form = document.getElementById('predictionForm');
         const submitButton = document.getElementById('submitButton');
         const loadingIndicator = document.getElementById('loadingIndicator');
@@ -183,18 +182,18 @@
         const weightInput = document.getElementById('weight');
         const heightInput = document.getElementById('height');
         const bmiInput = document.getElementById('bmi');
-        
-        // FastAPI endpoint URL'si
-        // Önemli Düzeltme: Sunucunuzun çalıştığı tam adresi kullanın. Varsayılan olarak 8000 portunu kullanır.
-        const PREDICT_URL = "http://127.0.0.1:8000/predict"; 
-        
-        // Vücut Kitle İndeksi (BMI) hesaplama fonksiyonu
+
+        // FastAPI endpoint URL
+        // Important: Use the full address where your server is running. It typically uses port 8000.
+        const PREDICT_URL = "http://127.0.0.1:8000/predict";
+
+        // Function to calculate Body Mass Index (BMI)
         function calculateBMI() {
             const weight = parseFloat(weightInput.value);
             const height = parseFloat(heightInput.value); // cm
-            
+
             if (weight > 0 && height > 0) {
-                // BMI = Ağırlık (kg) / [Boy (m)]^2
+                // BMI = Weight (kg) / [Height (m)]^2
                 const heightMeters = height / 100;
                 const bmi = weight / (heightMeters * heightMeters);
                 bmiInput.value = bmi.toFixed(2);
@@ -202,22 +201,22 @@
                 bmiInput.value = '';
             }
         }
-        
-        // Boy ve Kilo inputlarında değişiklik olduğunda BMI'ı otomatik hesapla
+
+        // Auto-calculate BMI when Weight or Height inputs change
         weightInput.addEventListener('input', calculateBMI);
         heightInput.addEventListener('input', calculateBMI);
 
-        // Form gönderimi
+        // Form submission logic
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // UI durumunu sıfırla
+
+            // Reset UI state
             submitButton.disabled = true;
             loadingIndicator.classList.remove('hidden');
             resultContainer.classList.add('hidden');
             errorContainer.classList.add('hidden');
-            
-            // Gelen veriyi (inputları) toplama
+
+            // Collect input data
             const data = {
                 age: parseInt(document.getElementById('age').value),
                 weight: parseInt(weightInput.value),
@@ -226,13 +225,13 @@
                 sleep: parseFloat(document.getElementById('sleep').value),
                 sugar_intake: document.getElementById('sugar_intake').value,
                 smoking: document.getElementById('smoking').value,
-                alcohol: document.getElementById('alcohol').value, 
+                alcohol: document.getElementById('alcohol').value,
                 married: document.getElementById('married').value,
                 profession: document.getElementById('profession').value,
                 bmi: parseFloat(bmiInput.value)
             };
-            
-            // Tahmini FastAPI'ye gönderme
+
+            // Send prediction to FastAPI
             try {
                 const response = await fetch(PREDICT_URL, {
                     method: 'POST',
@@ -244,29 +243,29 @@
 
                 if (!response.ok) {
                     const errorJson = await response.json();
-                    // FastAPI'den gelen detay mesajını yakala
-                    throw new Error(errorJson.detail || `HTTP Hata Kodu: ${response.status}`);
+                    // Catch the detailed message from FastAPI
+                    throw new Error(errorJson.detail || `HTTP Error Code: ${response.status}`);
                 }
 
                 const result = await response.json();
                 const prediction = result.prediction;
-                
-                // Sonucu UI'da gösterme
+
+                // Display result in the UI
                 predictionResult.textContent = prediction.toUpperCase();
                 resultContainer.classList.remove('hidden');
-                
+
                 let colorClass = '';
                 let descriptionText = '';
 
                 if (prediction.toLowerCase() === 'low') {
                     colorClass = 'text-green-600 bg-green-50';
-                    descriptionText = 'Tebrikler! Yaşam tarzı verilerinize göre sağlık riskiniz düşük görünüyor. Lütfen bu alışkanlıklarınızı sürdürün.';
+                    descriptionText = 'Congratulations! Based on your lifestyle data, your health risk appears to be low. Please continue maintaining these habits.';
                 } else if (prediction.toLowerCase() === 'high') {
                     colorClass = 'text-red-600 bg-red-50';
-                    descriptionText = 'Dikkat! Yaşam tarzı verilerinize göre sağlık riskiniz yüksek çıkmıştır. Daha sağlıklı alışkanlıklar edinmeniz önerilir.';
+                    descriptionText = 'Warning! Based on your lifestyle data, your health risk has been determined as high. It is recommended that you adopt healthier habits.';
                 } else {
                     colorClass = 'text-gray-600 bg-gray-50';
-                    descriptionText = 'Tahmin başarılı ancak risk seviyesi belirlenemedi.';
+                    descriptionText = 'Prediction successful, but the risk level could not be determined.';
                 }
 
                 resultContainer.className = `mt-6 p-4 rounded-lg text-center shadow-inner ${colorClass}`;
@@ -274,23 +273,23 @@
 
 
             } catch (error) {
-                console.error('Tahmin hatası:', error);
-                // Önceki hatayı çözmek için URL'yi kontrol edin.
+                console.error('Prediction error:', error);
+
                 let displayError = error.message;
                 if (error.message.includes("Failed to parse URL")) {
-                     displayError = "Sunucu URL'si hatası! Lütfen PREDICT_URL'nin (şu anda 127.0.0.1:8000) doğru olduğunu kontrol edin.";
+                     displayError = "Server URL error! Please check if PREDICT_URL (currently 127.0.0.1:8000) is correct.";
                 }
-                
-                errorMessage.textContent = `Tahmin sırasında bir sorun oluştu: ${displayError}`;
+
+                errorMessage.textContent = `An issue occurred during prediction: ${displayError}`;
                 errorContainer.classList.remove('hidden');
             } finally {
-                // UI durumunu normale döndür
+                // Return UI state to normal
                 submitButton.disabled = false;
                 loadingIndicator.classList.add('hidden');
             }
         });
-        
-        // Uygulama yüklendiğinde BMI'ı bir kez hesapla
+
+        // Calculate BMI once when the application loads
         calculateBMI(); 
     </script>
 </body>
