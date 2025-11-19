@@ -45,7 +45,9 @@ The application will run on http://127.0.0.1:8000 by default.
 ### Dataset Source
 https://www.kaggle.com/datasets/zahranusrat/lifestyle-and-health-risk-prediction-dataset
 
-<img width="320" height="400" alt="Screenshot 2025-11-19 at 19 50 44" src="https://github.com/user-attachments/assets/d01fab14-f34f-481b-a532-a270a61e98d5" />
-<img width="320" height="400" alt="Screenshot 2025-11-19 at 19 51 31" src="https://github.com/user-attachments/assets/6fce6360-1acb-406d-9b04-13923367bb16" />
-<img width="320" height="400" alt="Screenshot 2025-11-19 at 19 51 54" src="https://github.com/user-attachments/assets/4025cf39-edca-4dfa-bbd6-b9ca61a4de11" />
+## ✨📸 Screenshot
+
+<img width="300" height="400" alt="Screenshot 2025-11-19 at 19 50 44" src="https://github.com/user-attachments/assets/d01fab14-f34f-481b-a532-a270a61e98d5" />
+<img width="300" height="400" alt="Screenshot 2025-11-19 at 19 51 31" src="https://github.com/user-attachments/assets/6fce6360-1acb-406d-9b04-13923367bb16" />
+<img width="300" height="400" alt="Screenshot 2025-11-19 at 19 51 54" src="https://github.com/user-attachments/assets/4025cf39-edca-4dfa-bbd6-b9ca61a4de11" />
 
