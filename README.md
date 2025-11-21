@@ -23,6 +23,22 @@ This project is a **Machine Learning (ML) solution** developed to predict indivi
 
 **(See `requirements.txt` for all dependencies.)**
 
+
+## ⚙️ System Workflow / Technical Details
+
+The project operates primarily in 3 main phases: Model Loading, API Service, and Database Interaction.
+
+1.  **Model Training and Loading:**
+    * The model was trained using the Kaggle dataset and specifically saved as a **RandomForestClassifier** in the `health_risk_complete.pkl` file.
+    * The `app.py` file loads this trained model into memory when the application starts.
+2.  **Prediction Workflow:**
+    * Users send input data to the prediction endpoint (`/predict`) on the FastAPI server via the web interface or a direct POST request.
+    * `app.py` receives this input and performs the risk classification using the **RandomForestClassifier** model held in memory.
+3.  **Database Operations:**
+    * The `db_operations.py` module manages the prediction process and saves the input parameters and the resulting risk outcome for each prediction into the **SQLite** database (`Health_Risk.db`).
+    * The result is communicated back to the user via the API response or on the web page.
+    
+
 ## 🚀 Setup and Running
 
 ### 1. Install Dependencies
